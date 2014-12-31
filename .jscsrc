@@ -1,0 +1,86 @@
+{
+  "esnext": true,
+
+  "validateQuoteMarks": "'",
+
+  "maximumLineLength": {
+    "value": 120,
+    "allowComments": true,
+    "allowRegex": true
+  },
+
+  "requireCurlyBraces": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "try",
+    "catch"
+  ],
+
+  "requireSpaceBeforeKeywords": [
+    "else",
+    "catch"
+  ],
+  "requireSpaceAfterKeywords": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "switch",
+    "return",
+    "try",
+    "catch",
+    "typeof",
+    "function"
+  ],
+  "requirePaddingNewlinesBeforeKeywords": [
+    "do",
+    "for",
+    "if",
+    "switch",
+    "try",
+    "while",
+    "return"
+  ],
+  "requireSpacesInFunction": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+  "validateIndentation": 4,
+  "requireSpaceAfterLineComment": true,
+  "requireSpaceBeforeBinaryOperators": true,
+  "requireSpaceAfterBinaryOperators": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireSpaceBeforeBlockStatements": true,
+  "requireSpacesInsideObjectBrackets": "all",
+  "requireSpaceBeforeObjectValues": true,
+  "validateParameterSeparator": ", ",
+  "requireCommaBeforeLineBreak": true,
+  "requireBlocksOnNewline": true,
+
+  "disallowSpaceAfterPrefixUnaryOperators": true,
+  "disallowSpaceAfterObjectKeys": true,
+  "disallowSpacesInsideArrayBrackets": "all",
+  "disallowSpacesInCallExpression": true,
+  "disallowMultipleLineBreaks": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowMultipleLineStrings": true,
+  "disallowMixedSpacesAndTabs": true,
+  "disallowTrailingComma": true,
+  "disallowPaddingNewlinesInBlocks": true,
+  "disallowKeywordsOnNewLine": ["else"],
+
+  "requireParenthesesAroundIIFE": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireDotNotation": true,
+  "requireYodaConditions": true,
+  "disallowFunctionDeclarations": true,
+  "disallowImplicitTypeConversion": ["numeric", "boolean", "binary", "string"],
+  "requireCapitalizedComments": true,
+  "disallowMultipleVarDecl": true,
+  "disallowKeywords": ["with"],
+  "disallowQuotedKeysInObjects": true
+}
