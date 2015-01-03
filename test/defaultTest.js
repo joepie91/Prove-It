@@ -356,7 +356,8 @@ describe('Default Validators', function () {
         prove().try(
             prove('Value').error('{PATH}1 should error'),
             prove('Value').error('{PATH}2 should error')
-        ).test('').should.eql(['Value1 should error', 'Value2 should error']);
+        ).test('').should
+            .have.property('errors').eql(['Value1 should error', 'Value2 should error']);
 
         // One try passes (success).
         prove().try(
@@ -370,7 +371,8 @@ describe('Default Validators', function () {
             {},
             function () {},
             prove('Value').String()
-        ).test(1).should.eql(['Value should be a string']);
+        ).test(1).should
+            .have.property('errors').eql(['Value should be a string']);
     });
 
     it('"equals" should that a value equals another', function () {
@@ -411,11 +413,14 @@ describe('Default Validators', function () {
         });
 
         // Multiple equals
-        prove('It').equals('hello', 'world').test('hi').should.eql(['It should equal hello or world']);
+        prove('It').equals('hello', 'world').test('hi').should
+            .have.property('errors').eql(['It should equal hello or world']);
         // One equals
-        prove('It').equals('hello').test('hi').should.eql(['It should equal hello']);
+        prove('It').equals('hello').test('hi').should
+            .have.property('errors').eql(['It should equal hello']);
         // Null equals
-        prove('It').equals().test('hi').should.eql(['It should equal nothing']);
+        prove('It').equals().test('hi').should
+            .have.property('errors').eql(['It should equal nothing']);
     });
 
     it('"integer" should confirm a value has no decimal places', function () {
@@ -605,11 +610,14 @@ describe('Default Validators', function () {
         });
 
         // Multiple contains
-        prove('It').contains('hello', 'world').test('hi').should.eql(['It should contain hello and world']);
+        prove('It').contains('hello', 'world').test('hi').should
+            .have.property('errors').eql(['It should contain hello and world']);
         // One contain
-        prove('It').contains('hello').test('hi').should.eql(['It should contain hello']);
+        prove('It').contains('hello').test('hi').should
+            .have.property('errors').eql(['It should contain hello']);
         // No contains
-        prove('It').contains().test('hi').should.eql(['It should contain nothing']);
+        prove('It').contains().test('hi').should
+            .have.property('errors').eql(['It should contain nothing']);
     });
 
     it('"matches" should confirm values matches a given RegExp', function () {

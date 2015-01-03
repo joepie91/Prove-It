@@ -59,6 +59,19 @@ define(['prove-it'], function (prove) {...});
 + **prove(label)** : Returns a chainable validator, with an optional label for error messages.
 + **prove.concat(...Tests)** : Merges all provided validator chains, and returns a new one.
 + **prove.extend(validators)** : Adds all of the given validators to the prove validator chain (example below).
+```JavaScript
+prove.extend({
+    myValidator: function (/** Validator chaining options */) {
+        // Pre validate setup
+        return {
+            validator: function (val) {
+                // return true for success, false for fail.
+            },
+            msg: '{PATH} should have failed my validator with {VALUE}' // {PATH} and {VALUE} will be interpolated.
+        };
+    }
+});
+```
 
 ####Invoking prove returns a chainable validator. For a list of validators click [here!](https://github.com/DylanPiercey/Prove-It/blob/master/Validators.md)
 

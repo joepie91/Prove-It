@@ -36,9 +36,10 @@ describe('Function Validator', function () {
             return prove().String();
         });
 
-        test.test(doc).should.eql([
-            'Test Path should be a string'
-        ]);
+        test.test(doc).should
+            .have.property('errors').eql([
+                'Test Path should be a string'
+            ]);
     });
 
     it('should override path from previous instance', function () {
@@ -48,9 +49,10 @@ describe('Function Validator', function () {
             return prove('New Test Path').String();
         });
 
-        test.test(doc).should.eql([
-            'New Test Path should be a string'
-        ]);
+        test.test(doc).should
+            .have.property('errors').eql([
+                'New Test Path should be a string'
+            ]);
     });
 
     it('should return true without returning a test', function () {
