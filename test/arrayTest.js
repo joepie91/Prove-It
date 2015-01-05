@@ -73,8 +73,7 @@ describe('Array Validator', function () {
             'phones.1.label': {
                 message: [
                     'Phone Label is a required field'
-                ],
-                value: undefined
+                ]
             }
         });
     });

@@ -172,6 +172,10 @@ prove().ascii().test('Hello World'); // True
 ```JavaScript
 prove().ip(4).test('192.168.0.1'); // True
 ```
++ **phoneNumber()** : Input should be a phone number.
+```JavaScript
+prove().phoneNumber().test('1-888-555-5555'); // True
+```
 + **creditCard(...ValidCards)** : Input should be 'Visa', 'MasterCard', 'AmericanExpress', 'DinersClub' 'Discover' or 'JCB' credit cards. If there are no `ValidCards` provided then any type of card will pass, otherwise only the `ValidCards` will pass.
 ```JavaScript
 // Note: vendor names are case insensitive.

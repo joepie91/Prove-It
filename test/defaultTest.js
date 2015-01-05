@@ -4,6 +4,15 @@ var should = require('should');
 var prove = require('../lib/index.js');
 var common = require('../lib/commonValues.js');
 
+var log = function (doc) {
+    console.log(JSON.stringify(doc, null, 4));
+
+    return {
+        errors: {}
+    };
+};
+
+
 var test = function (options) {
     if (!options.check) {
         throw new Error('No validator specified for test');
@@ -864,8 +873,8 @@ describe('Default Validators', function () {
         test({
             check: 'phoneNumber',
             valid: [
-                '9634',
-                '-9634',
+                '5459634',
+                '-3459634',
                 '266 1234',
                 '266-1234',
                 '636 48018',
