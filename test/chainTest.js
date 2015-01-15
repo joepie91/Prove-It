@@ -9,7 +9,7 @@ describe('Chain Validator', function () {
         var validators = prove();
 
         for (var name in validators) {
-            if (validators.hasOwnProperty(name) && !/test|optional/.test(name)) {
+            if (validators.hasOwnProperty(name) && !/test|optional|required|selected|path|isRequired/.test(name)) {
                 prove()[name]().test(undefined).should.not.equal(true);
                 prove()[name]().test(null).should.not.equal(true);
                 prove()[name]().required().test(undefined).should.not.equal(true);
