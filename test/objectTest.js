@@ -28,14 +28,14 @@ describe('Object Validator', function () {
         };
 
         prove('Test Doc').Object(test).test(doc).errors.should.eql({
-            'name.first': {
-                message: ['First Name should be a string'],
+            'name.first': [{
+                type: 'String',
                 value: 1
-            },
-            'name.last': {
-                message: ['Last Name should be a string'],
+            }],
+            'name.last': [{
+                type: 'String',
                 value: 2
-            }
+            }]
         });
     });
 
@@ -54,38 +54,30 @@ describe('Object Validator', function () {
         var test = {
             name: prove().Object({
                 first: prove().Object({
-                    value: prove('First Name').String(),
-                    caps: prove('First Name Caps').String()
+                    value: prove().String(),
+                    caps: prove().String()
                 }),
-                last: prove('Last Name').String()
+                last: prove().String()
             })
         };
 
         prove().Object(test).test(doc).errors.should.eql({
-            'name.first.value': {
-                message: [
-                    'First Name should be a string'
-                ],
+            'name.first.value': [{
+                type: 'String',
                 value: 1
-            },
-            'name.first.caps': {
-                message: [
-                    'First Name Caps should be a string'
-                ],
+            }],
+            'name.first.caps': [{
+                type: 'String',
                 value: 2
-            },
-            'name.last': {
-                message: [
-                    'Last Name should be a string'
-                ],
+            }],
+            'name.last': [{
+                type: 'String',
                 value: 3
-            },
-            phone: {
-                message: [
-                    'phone is not an allowed field'
-                ],
+            }],
+            phone: [{
+                type: 'extraField',
                 value: '555555'
-            }
+            }]
         });
     });
 
@@ -100,66 +92,23 @@ describe('Object Validator', function () {
         var test = {
             name: prove().Object(
                 {
-                    last: prove('Last Name').String()
+                    last: prove().String()
                 },
                 {
-                    first: prove('First Name').String()
+                    first: prove().String()
                 }
             )
         };
 
-        prove('Test Doc').Object(test).test(doc).errors.should.eql({
-            'name.first': {
-                message: ['First Name should be a string'],
+        prove().Object(test).test(doc).errors.should.eql({
+            'name.first': [{
+                type: 'String',
                 value: 1
-            },
-            'name.last': {
-                message: ['Last Name should be a string'],
+            }],
+            'name.last': [{
+                type: 'String',
                 value: 2
-            }
-        });
-    });
-
-    it('should run a regex on keys', function () {
-        var doc = {
-            name: {
-                first: 1,
-                last: 2
-            },
-            Name: {
-                first: 1,
-                last: 2
-            }
-        };
-
-        var test = {
-            '/name|Name/': prove().Object(
-                {
-                    last: prove('Last Name').String()
-                },
-                {
-                    first: prove('First Name').String()
-                }
-            )
-        };
-
-        prove('Test Doc').Object(test).test(doc).errors.should.eql({
-            'name.first': {
-                message: ['First Name should be a string'],
-                value: 1
-            },
-            'name.last': {
-                message: ['Last Name should be a string'],
-                value: 2
-            },
-            'Name.first': {
-                message: ['First Name should be a string'],
-                value: 1
-            },
-            'Name.last': {
-                message: ['Last Name should be a string'],
-                value: 2
-            }
+            }]
         });
     });
 
@@ -167,11 +116,7 @@ describe('Object Validator', function () {
         var instance = prove();
         instance.Object.bind(instance, {
             first: function () {},
-            last: prove('Last Name').String()
+            last: prove().String()
         }).should.throw();
     });
-
-    // It should compose the fields of multiple objects.
-
-    // It should validate a required fields on an object.
 });

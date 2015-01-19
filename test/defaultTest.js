@@ -48,6 +48,45 @@ var test = function (options) {
 };
 
 describe('Default Validators', function () {
+    it('should not accept null or undefined for all tests', function () {
+        var validators = prove();
+
+        for (var name in validators) {
+            if (validators.hasOwnProperty(name) && !/test|optional|required/.test(name)) {
+                prove()[name]().test(undefined).should.not.equal(true);
+                prove()[name]().test(null).should.not.equal(true);
+                prove()[name]().required().test(undefined).should.not.equal(true);
+                prove()[name]().required().test(null).should.not.equal(true);
+            }
+        }
+    });
+
+    it('should accept null or undefined if optional or required(false) is chained', function () {
+        prove().optional().test(undefined).should.equal(true);
+        prove().optional(true).test(null).should.equal(true);
+        prove().required(false).test(undefined).should.equal(true);
+        prove().required(false).test(null).should.equal(true);
+    });
+
+    it('should be able to concat two instances', function () {
+        var instance1 = prove().String();
+        var instance2 = prove().length(5);
+        var merged = prove.concat(instance1, instance2);
+
+        merged.test(1).should
+            .have.property('errors').eql([
+                {
+                    type: 'String',
+                    value: 1
+                },
+                {
+                    type: 'length',
+                    args: [5],
+                    value: 1
+                }
+            ]);
+    });
+    
     it('"String" should confirm value is a string', function () {
         test({
             check: 'String',
@@ -324,54 +363,50 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"error" should always add an error message', function () {
-        test({
-            check: 'error',
-            valid: [],
-            invalid: [
-                common.integerNumber,
-                common.floatNumber,
-                common.numericExponentNumber,
-                common.booleanTrue,
-                common.booleanFalse,
-                common.booleanInt0,
-                common.booleanInt1,
-                common.asciiString,
-                common.asciiStringWithApostrophe,
-                common.slavicString,
-                common.russianString,
-                common.kanjiString,
-                common.hiraganaString,
-                common.aftricanString,
-                common.arabicString,
-                common.newLineNString,
-                common.newLineNRString,
-                common.presentationalHtml,
-                common.scriptHtml,
-                common.otherHtml,
-                common.valueEmptyString,
-                common.numericStringNumber,
-                common.booleanString0,
-                common.booleanString1,
-                common.typeEmailAddress,
-                common.typeMongoIdString,
-                common.valueNull
-            ]
+    it('"annotate" should add an annotation to the current instance', function () {
+        prove().String().annotate({
+            label: 'Test'
+        }).test(1)
+            .should.have.property('errors')
+            .with.property('0').eql({
+                type: 'String',
+                label: 'Test',
+                value: 1
+            });
+    });
+
+    it('"eval" should run a function that returns a validator', function () {
+        var doc = ['555555', 1];
+
+        prove().eval(function (/**Val*/) {
+            return prove().Array(prove().String());
+        }).test(doc).errors.should.eql({
+            1: [{
+                type: 'String',
+                value: 1
+            }]
         });
+        
+        prove().eval(function (/**Val*/) {
+            return prove().eval(function () {});
+        }).test(doc).should.equal(true);
     });
 
     it('"try" should try multiple validators', function () {
         // Both trys fail. (error).
         prove().try(
-            prove('Value').error('{PATH}1 should error'),
-            prove('Value').error('{PATH}2 should error')
+            prove().Number()
         ).test('').should
-            .have.property('errors').eql(['Value1 should error', 'Value2 should error']);
+            .have.property('errors')
+            .with.property('0').eql({
+                type: 'Number',
+                value: ''
+            });
 
         // One try passes (success).
         prove().try(
-            prove('Value').String(),
-            prove('Value').Number()
+            prove().String(),
+            prove().Number()
         ).test('').should.equal(true);
 
         // Ignore non-tests
@@ -379,9 +414,13 @@ describe('Default Validators', function () {
             null,
             {},
             function () {},
-            prove('Value').String()
+            prove().String()
         ).test(1).should
-            .have.property('errors').eql(['Value should be a string']);
+            .have.property('errors')
+            .with.property('0').eql({
+                type: 'String',
+                value: 1
+            });
     });
 
     it('"equals" should that a value equals another', function () {
@@ -420,16 +459,6 @@ describe('Default Validators', function () {
                 common.valueNull
             ]
         });
-
-        // Multiple equals
-        prove('It').equals('hello', 'world').test('hi').should
-            .have.property('errors').eql(['It should equal hello or world']);
-        // One equals
-        prove('It').equals('hello').test('hi').should
-            .have.property('errors').eql(['It should equal hello']);
-        // Null equals
-        prove('It').equals().test('hi').should
-            .have.property('errors').eql(['It should equal nothing']);
     });
 
     it('"integer" should confirm a value has no decimal places', function () {
@@ -617,16 +646,27 @@ describe('Default Validators', function () {
                 common.valueEmptyString
             ]
         });
-
-        // Multiple contains
-        prove('It').contains('hello', 'world').test('hi').should
-            .have.property('errors').eql(['It should contain hello and world']);
-        // One contain
-        prove('It').contains('hello').test('hi').should
-            .have.property('errors').eql(['It should contain hello']);
-        // No contains
-        prove('It').contains().test('hi').should
-            .have.property('errors').eql(['It should contain nothing']);
+        
+        // Empty args should be always false.
+        test({
+            check: 'contains',
+            args: [],
+            valid: [],
+            invalid: [
+                'abc',
+                'abcd',
+                'abcde',
+                'abcdef',
+                'hello',
+                'world',
+                'hello world',
+                'a world of wonders',
+                common.arrayIndexedIntegers,
+                common.arrayIndexedStrings,
+                common.arrayEmpty,
+                common.valueEmptyString
+            ]
+        });
     });
 
     it('"matches" should confirm values matches a given RegExp', function () {

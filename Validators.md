@@ -55,14 +55,34 @@ prove().Array(
 ).test([1]); // True
 ```
 ##Common
++ **annotate(annotations)** : Adds an annotation object to the current error.
+```JavaScript
+prove().String().annotate({ label: 'My Label' }).test(1);
 
-+ **optional()** : By default a non-null input is required, this will change that.
+/**
+* Returns
+* {
+*    "name": "ValidationError",
+*    "message": "Validation Failed",
+*    "errors": [
+*       {
+*           type: 'String', // The name of the failed validator.
+*           value: 1, // The value that failed the validator.
+*           label: 'My Label' // A custom annotation added to the error.
+*       }
+*    ]
+* }
+*/
+
+```
+
++ **optional(isOptional)** : By default a non-null input is required, this will change that.
 ```JavaScript
 prove().optional().test(null); // True
 ```
-+ **error(msg)** : Any input will error and the `msg` argument will be the error.
++ **required(isRequired)** : By default a non-null input is required, with no arguments this will do nothing.
 ```JavaScript
-prove().error('{PATH} will never be true!').test(1); // Prove-It Error
+prove().optional().test(null); // True
 ```
 + **eval(...Functions)** : Will pass the input to all provided `Functions`, the function can then return another test that will act as if it was on the same prove-it chain (Path is carried on but can be overwritten).
 ```JavaScript
