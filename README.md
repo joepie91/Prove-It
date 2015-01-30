@@ -56,7 +56,7 @@ define(['prove-it'], function (prove) {...});
 
 #API
 
-+ **prove(label)** : Returns a chainable validator, with an optional label for error messages.
++ **prove()** : Returns a chainable validator.
 + **prove.concat(...Tests)** : Merges all provided validator chains, and returns a new one.
 + **prove.extend(validators)** : Adds all of the given validators to the prove validator chain (example below).
 ```JavaScript

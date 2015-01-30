@@ -260,6 +260,38 @@ describe('Default Validators', function () {
             ]
         });
     });
+    
+    it('"Error" should confirm value is an Error', function () {
+        test({
+            check: 'Error',
+            valid: [
+                new Error()
+            ],
+            invalid: [
+                common.asciiString,
+                common.asciiStringWithApostrophe,
+                common.slavicString,
+                common.russianString,
+                common.kanjiString,
+                common.hiraganaString,
+                common.aftricanString,
+                common.arabicString,
+                common.newLineNString,
+                common.newLineNRString,
+                common.presentationalHtml,
+                common.scriptHtml,
+                common.otherHtml,
+                common.valueEmptyString,
+                common.numericStringNumber,
+                common.integerNumber,
+                common.floatNumber,
+                common.numericExponentNumber,
+                common.typeEmailAddress,
+                common.typeMongoIdString,
+                common.valueNull
+            ]
+        });
+    });
 
     it('"Function" should confirm value is a Function', function () {
         test({
@@ -290,6 +322,40 @@ describe('Default Validators', function () {
                 common.typeEmailAddress,
                 common.typeMongoIdString,
                 common.valueNull
+            ]
+        });
+    });
+
+    it('"Arguments" should confirm value is an arguments object', function () {
+        test({
+            check: 'Arguments',
+            valid: [
+                arguments
+            ],
+            invalid: [
+                common.asciiString,
+                common.asciiStringWithApostrophe,
+                common.slavicString,
+                common.russianString,
+                common.kanjiString,
+                common.hiraganaString,
+                common.aftricanString,
+                common.arabicString,
+                common.newLineNString,
+                common.newLineNRString,
+                common.presentationalHtml,
+                common.scriptHtml,
+                common.otherHtml,
+                common.valueEmptyString,
+                common.numericStringNumber,
+                common.integerNumber,
+                common.floatNumber,
+                common.numericExponentNumber,
+                common.typeEmailAddress,
+                common.typeMongoIdString,
+                common.arrayEmpty,
+                common.arrayIndexedIntegers,
+                common.arrayIndexedStrings
             ]
         });
     });
@@ -523,6 +589,23 @@ describe('Default Validators', function () {
         });
     });
 
+    it('"empty" should confirm that a value is empty', function () {
+        test({
+            check: 'empty',
+            valid: [
+                '',
+                [],
+                {},
+                1
+            ],
+            invalid: [
+                '1',
+                [1],
+                { a: '1' }
+            ]
+        });
+    });
+
     it('"length" should confirm values length is within a range', function () {
         test({
             check: 'length',
@@ -560,6 +643,28 @@ describe('Default Validators', function () {
             ],
             invalid: [
                 {}
+            ]
+        });
+    });
+    
+    it('"unique" should confirm that the input contains unique values', function () {
+        test({
+            check: 'unique',
+            valid: [
+                'a',
+                'ab',
+                'abc',
+                'abcd',
+                'abcde',
+                common.arrayIndexedIntegers,
+                common.arrayIndexedStrings,
+                common.objectIntegers,
+                common.objectStrings
+            ],
+            invalid: [
+                '11',
+                [1, 1],
+                { x: 1, y: 1 }
             ]
         });
     });
@@ -621,6 +726,36 @@ describe('Default Validators', function () {
                 common.arrayIndexedStrings,
                 common.arrayEmpty,
                 common.valueEmptyString
+            ]
+        });
+    });
+
+    it('"sorted" should confirm a value is sorted with a sort function', function () {
+        test({
+            check: 'sorted',
+            valid: [
+                '123',
+                'abc',
+                [1, 2, 3],
+                ['a', 'b', 'c']
+            ],
+            invalid: [
+                'acb',
+                [1, 3, 2],
+                [1, 3, 3, 2]
+            ]
+        });
+        
+        // custom test function
+        test({
+            check: 'sorted',
+            args: [function (a, b) { return b - a; }],
+            valid: [
+                [3, 2, 1]
+            ],
+            invalid: [
+                [1, 2, 3],
+                [1, 3, 3, 2]
             ]
         });
     });
@@ -855,6 +990,36 @@ describe('Default Validators', function () {
                 'ｘｙｚ０９８',
                 '１２３456',
                 'ｶﾀｶﾅ'
+            ]
+        });
+    });
+    
+    it('"html" should confirm a value has html tags', function () {
+        test({
+            check: 'html',
+            valid: [  
+                '<foobar>',
+                '</br>',
+                '<img src=\'hi>\'/>',
+                common.presentationalHtml,
+                common.scriptHtml,
+                common.otherHtml,
+            ],
+            invalid: [  
+                common.asciiString,
+                common.asciiStringWithApostrophe,
+                common.slavicString,
+                common.russianString,
+                common.kanjiString,
+                common.hiraganaString,
+                common.aftricanString,
+                common.arabicString,
+                common.newLineNString,
+                common.newLineNRString,
+                common.valueEmptyString,
+                common.numericStringNumber,
+                common.typeEmailAddress,
+                common.typeMongoIdString,
             ]
         });
     });

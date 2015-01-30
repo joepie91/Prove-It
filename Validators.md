@@ -28,9 +28,19 @@ prove().Date().test(new Date()); // True
 ```JavaScript
 prove().RegExp().test(/^[a-zA-Z]+$/); // True
 ```
++ **Error()** : Input should be a Error type.
+```JavaScript
+prove().Error().test(new Error()); // True
+```
 + **Function()** : Input should be a Function type.
 ```JavaScript
 prove().Function().test(function () {}); // True
+```
++ **Arguments()** : Input should be a Arguments type.
+```JavaScript
+(function () {
+    prove().Arguments().test(arguments); // True
+}())
 ```
 + **Object(...Schemas)** : Input should be an object type and adhere to the provided `Schemas`.
 ```JavaScript
@@ -130,9 +140,17 @@ prove().gt(1).test(2); // True
 ```JavaScript
 prove().gte(1).test(1); // True
 ```
++ **empty()** : Input should be an empty value.
+```JavaScript
+prove().empty().test([]); // True
+```
 + **length(min=0, max)** : Input should have a length between the `min` and `max` (inclusive).
 ```JavaScript
 prove().length(5, 15).test('Hello World'); // True
+```
++ **unique()** : Input should contain only unique values.
+```JavaScript
+prove().unique().test([1, 2, 3]); // True
 ```
 + **startsWith(find)** : Input should start with the value `find`.
 ```JavaScript
@@ -141,6 +159,10 @@ prove().startsWith('hello').test('Hello World'); // True
 + **endsWith(find)** : Input should end with the value `find`.
 ```JavaScript
 prove().endsWith('World').test('Hello World'); // True
+```
++ **sorted(compare)** : Input should be sorted with an optional `compare` function.
+```JavaScript
+prove().sorted(function (a, b) { return b - a; }).test([3, 2, 1]); // True
 ```
 + **contains(...MustContain)** : Input should contain all `MustContain` values.
 ```JavaScript
@@ -187,6 +209,10 @@ prove().hexColor().test('#ff0034'); // True
 + **ascii()** : Input should only consist of ascii characters.
 ```JavaScript
 prove().ascii().test('Hello World'); // True
+```
++ **html()** : Input should have some html tags.
+```JavaScript
+prove().html().test('</br>'); // True
 ```
 + **ip(version)** : Will test against IPV `version` if it is '4' or '6' otherwise it will try both.
 ```JavaScript
