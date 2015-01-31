@@ -19,7 +19,7 @@ prove().it.is.a.String().and.it.has.a.length(10).and.contains('hi')
 ##Negate
 
 + **not&#91;validator&#93;(value)** : Reverses the results of a validator.
-    + This works for all validators except for `eval` and `try`.
+    + This works for all validators except for `optional`, `required`, `eval`, `try`.
     + The `not.Object` and `not.Array` validators do not accept arguments. 
 ```JavaScript
 prove().not.String().test(1); // True
