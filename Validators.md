@@ -225,6 +225,10 @@ prove().ascii().test('Hello World'); // True
 ```JavaScript
 prove().html().test('</br>'); // True
 ```
++ **mongoId()** : Input should be a mongoId.
+```JavaScript
+prove().mongoId().test('54cd23bf3f8297fa82f9795b'); // True
+```
 + **ip(version)** : Will test against IPV `version` if it is '4' or '6' otherwise it will try both.
 ```JavaScript
 prove().ip(4).test('192.168.0.1'); // True

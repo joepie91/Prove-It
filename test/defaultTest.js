@@ -1040,6 +1040,39 @@ describe('Default Validators', function () {
         });
     });
     
+    it('"mongoId" should confirm a value is a mongoId', function () {
+        test({
+            check: 'mongoId',
+            valid: [
+                common.typeMongoIdString,
+                '54cd23bf3f8297fa82f9795b'
+            ],
+            invalid: [  
+                common.asciiString,
+                common.asciiStringWithApostrophe,
+                common.slavicString,
+                common.russianString,
+                common.kanjiString,
+                common.hiraganaString,
+                common.aftricanString,
+                common.arabicString,
+                common.newLineNString,
+                common.newLineNRString,
+                common.valueEmptyString,
+                common.numericStringNumber,
+                common.typeEmailAddress,
+                common.presentationalHtml,
+                common.scriptHtml,
+                common.otherHtml,
+                'deadBEEF',
+                'ff0044',
+                'abcdefg',
+                '',
+                '..'
+            ]
+        });
+    });
+    
     it('"ip" should confirm a value is ipv4 or ipv6', function () {
         test({  
             check:'ip',
