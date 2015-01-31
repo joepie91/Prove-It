@@ -52,7 +52,9 @@ describe('Default Validators', function () {
         var validators = prove();
 
         for (var name in validators) {
-            if (validators.hasOwnProperty(name) && !/test|optional|required/.test(name)) {
+            if (validators.hasOwnProperty(name) &&
+                !/test|optional|required/.test(name) &&
+                'function' === typeof validators[name]) {
                 prove()[name]().test(undefined).should.not.equal(true);
                 prove()[name]().test(null).should.not.equal(true);
                 prove()[name]().required().test(undefined).should.not.equal(true);
@@ -85,6 +87,20 @@ describe('Default Validators', function () {
                     value: 1
                 }
             ]);
+    });
+    
+    it('"not" should negate a validator', function () {
+        prove().not.String().test(1).should.equal(true);
+        prove().not.String().test('test').should
+            .have.property('errors')
+            .with.property('0').eql({
+                type: 'not.String',
+                value: 'test'
+            });
+        
+        // // Should have ignored invalid validators.
+        should.not.exist(prove().not.try);
+        should.not.exist(prove().not.eval);
     });
     
     it('"String" should confirm value is a string', function () {

@@ -119,4 +119,9 @@ describe('Object Validator', function () {
             last: prove().String()
         }).should.throw();
     });
+    
+    it('should error with arguments when negated', function () {
+        var instance = prove();
+        instance.not.Object.bind(instance.not, { test: prove().String() }).should.throw();
+    });
 });

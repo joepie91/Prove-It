@@ -102,4 +102,9 @@ describe('Array Validator', function () {
         var instance = prove();
         instance.Array.bind(instance, function () {}).should.throw();
     });
+    
+    it('should error with arguments when negated', function () {
+        var instance = prove();
+        instance.not.Array.bind(instance.not, prove().String()).should.throw();
+    });
 });

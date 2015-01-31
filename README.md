@@ -48,11 +48,15 @@ define(['prove-it'], function (prove) {...});
 ```
 
 #Goals
-
-* Chainable validations that could be composed and extended easily.
-* Validate all of the fields of an object (even deep ones).
-* Validate entire arrays and collections.
+* Chainable validators that read clearly.
+* Composable validators that make sense.
+* Schema validation for complex objects, arrays and collections.
 * An error message structure that is both friendly for developers and extensible on the client side.
+
+#Plugins
+* [MongoDB (Monk)](https://github.com/DylanPiercey/Monk-Prove)
+* [Koa](https://github.com/DylanPiercey/Koa-Prove)
+* More to come!
 
 #API
 
@@ -68,9 +72,11 @@ prove.extend({
         };
     }
 });
+
+prove().myValidator(/** options */).test(null)
 ```
 
-####Invoking prove returns a chainable validator. For a list of validators click [here!](https://github.com/DylanPiercey/Prove-It/blob/master/Validators.md)
+###For a list of validators click [here!](https://github.com/DylanPiercey/Prove-It/blob/master/Validators.md)
 
 #Example
 
@@ -117,10 +123,8 @@ var contactValidation = prove().Object({
 
 var result = contactValidation.test(doc); // Returns True if passed, otherwise error object.
 
-if (!result.errors) {
-    // Success!
-} else {
-    console.log(passed);
+if (result instanceof Error) {
+    console.log(result);
     // Would output all of the errors!
 /**
 {
@@ -178,6 +182,9 @@ if (!result.errors) {
     }
 }
 */
+} else {
+    // Success!
+}
 ```
 
 ---

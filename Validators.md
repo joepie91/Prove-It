@@ -6,6 +6,25 @@
 
 + **test(value)** : Runs all tests on the current instance against the provided `value`.
 
+##Chaining
+Every validator will return the Prove instance, so validators can be chained.
+To help chained validators read more clearly, you can use the following helpers anywhere in your chain:
+.an, .of, .a, .and, .be, .have, .with, .is, .which. Use them for better readability; they do nothing at all.
+For example:
+
+```JavaScript
+prove().it.is.a.String().and.it.has.a.length(10).and.contains('hi')
+```
+
+##Negate
+
++ **not&#91;validator&#93;(value)** : Reverses the results of a validator.
+    + This works for all validators except for `eval` and `try`.
+    + The `not.Object` and `not.Array` validators do not accept arguments. 
+```JavaScript
+prove().not.String().test(1); // True
+```
+
 ##Types
 
 + **String()** : Input should be a String type.
@@ -44,14 +63,6 @@ prove().Function().test(function () {}); // True
 ```
 + **Object(...Schemas)** : Input should be an object type and adhere to the provided `Schemas`.
 ```JavaScript
-/**
-* Note:
-* If a key starts with '/' and ends with '/'
-* it will be treated as a RegExp String and can match multiple properties.
-* 
-* Eg.
-* { '/name|title/': prove()... } // Matches name or title (RegExp).
-*/
 prove().Object({
     name: prove().String()
 }).test({
@@ -92,7 +103,7 @@ prove().optional().test(null); // True
 ```
 + **required(isRequired)** : By default a non-null input is required, with no arguments this will do nothing.
 ```JavaScript
-prove().optional().test(null); // True
+prove().required(false).test(null); // True
 ```
 + **eval(...Functions)** : Will pass the input to all provided `Functions`, the function can then return another test that will act as if it was on the same prove-it chain (Path is carried on but can be overwritten).
 ```JavaScript
