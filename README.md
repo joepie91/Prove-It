@@ -47,12 +47,21 @@ bower install prove-it
 var prove = require('prove-it');
 
 var schema = prove().Object({
-    username: prove().String().alphaNumeric().length(6, 30),
-    password: prove().String().optional().match(/[a-zA-Z0-9]{3,30}/),
-    contacts: prove().Array( // Prove an entire array.
+    username: prove().String().alphaNumeric().length(5, 30),
+    password: prove().String().optional().match(/[a-zA-Z0-9]{2,30}/),
+    phoneNumbers: prove().Array( // Prove an entire array.
         prove().String().phoneNumber()
     )
 });
+
+var doc = {
+    username: 'prove',
+    password: 'it',
+    phoneNumbers: [
+        '123',
+        '555-555-5555'
+    ]
+};
 
 var result = schema.test(doc); // Returns True if passed, otherwise error object.
 ```
@@ -62,7 +71,7 @@ The above schema defines the following constraints:
 * username
     * A required string.
     * Must contain only alpha numeric characters.
-    * Between 6 and 30 characters long.
+    * Between 5 and 30 characters long.
 * password
     * An optional string.
     * Must satisfy custom regex.
@@ -98,8 +107,8 @@ prove().myValidator(/** options */).test(null)
     // All errors will appear here.
     "errors": {
         
-        // The key is the full path of the error. In this case, the first contact number.
-        'contacts.0':
+        // The key is the full path of the error. In this case, the first phone number.
+        'phoneNumbers.0':
         
         // Array of errors for this path.
         [
