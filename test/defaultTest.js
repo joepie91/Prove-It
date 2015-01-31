@@ -569,36 +569,36 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"lt" should confirm value is an less than a provided number', function () {
+    it('"lessThan" should confirm value is an less than a provided number', function () {
         test({
-            check: 'lt',
+            check: 'lessThan',
             args: [1],
             valid: [0, -1, -2],
             invalid: [1, 2, 3]
         });
     });
 
-    it('"lte" should confirm value is an less or equal to a provided number', function () {
+    it('"lessThanOrEquals" should confirm value is an less or equal to a provided number', function () {
         test({
-            check: 'lte',
+            check: 'lessThanOrEquals',
             args: [1],
             valid: [1, 0, -1],
             invalid: [2, 3, 4]
         });
     });
 
-    it('"gt" should confirm value is an greater than a provided number', function () {
+    it('"greaterThan" should confirm value is an greater than a provided number', function () {
         test({
-            check: 'gt',
+            check: 'greaterThan',
             args: [1],
             valid: [2, 3, 4],
             invalid: [-1, 0, 1]
         });
     });
 
-    it('"gte" should confirm value is an greater or equal to a provided number', function () {
+    it('"greaterThanOrEquals" should confirm value is an greater or equal to a provided number', function () {
         test({
-            check: 'gte',
+            check: 'greaterThanOrEquals',
             args: [1],
             valid: [1, 2, 3],
             invalid: [-2, -1, 0]

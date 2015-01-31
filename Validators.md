@@ -135,21 +135,21 @@ prove().precision(1).test(1.1); // True
 ```JavaScript
 prove().divisibleBy(5).test(10); // True
 ```
-+ **lt(max)** : Input should be less than the `max`.
++ **lessThan(max)** : Input should be less than the `max`.
 ```JavaScript
-prove().lt(2).test(1); // True
+prove().lessThan(2).test(1); // True
 ```
-+ **lte(max)** : Input should be less than or equal to the `max`.
++ **lessThanOrEquals(max)** : Input should be less than or equal to the `max`.
 ```JavaScript
-prove().lt(1).test(1); // True
+prove().lessThanOrEquals(1).test(1); // True
 ```
-+ **gt(min)** : Input should be greater than the `min`.
++ **greaterThan(min)** : Input should be greater than the `min`.
 ```JavaScript
-prove().gt(1).test(2); // True
+prove().greaterThan(1).test(2); // True
 ```
-+ **gte(min)** : Input should be greater than or equal to the `min`.
++ **greaterThanOrEquals(min)** : Input should be greater than or equal to the `min`.
 ```JavaScript
-prove().gte(1).test(1); // True
+prove().greaterThanOrEquals(1).test(1); // True
 ```
 + **empty()** : Input should be an empty value.
 ```JavaScript
