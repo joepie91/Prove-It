@@ -71,14 +71,14 @@ describe('Default Validators', function () {
     });
 
     it('should be able to concat two instances', function () {
-        var instance1 = prove().String();
+        var instance1 = prove().string();
         var instance2 = prove().length(5);
         var merged = prove.concat(instance1, instance2);
 
         merged.test(1).should
             .have.property('errors').eql([
                 {
-                    type: 'String',
+                    type: 'string',
                     value: 1
                 },
                 {
@@ -90,11 +90,11 @@ describe('Default Validators', function () {
     });
     
     it('"not" should negate a validator', function () {
-        prove().not.String().test(1).should.equal(true);
-        prove().not.String().test('test').should
+        prove().not.string().test(1).should.equal(true);
+        prove().not.string().test('test').should
             .have.property('errors')
             .with.property('0').eql({
-                type: 'not.String',
+                type: 'not.string',
                 value: 'test'
             });
         
@@ -103,9 +103,9 @@ describe('Default Validators', function () {
         should.not.exist(prove().not.eval);
     });
     
-    it('"String" should confirm value is a string', function () {
+    it('"string" should confirm value is a string', function () {
         test({
-            check: 'String',
+            check: 'string',
             valid: [
                 new String(''),
                 common.asciiString,
@@ -141,9 +141,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"Number" should confirm value is a number', function () {
+    it('"number" should confirm value is a number', function () {
         test({
-            check: 'Number',
+            check: 'number',
             valid: [
                 new Number(1),
                 common.booleanInt0,
@@ -174,9 +174,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"Boolean" should confirm value is a boolean', function () {
+    it('"boolean" should confirm value is a boolean', function () {
         test({
-            check: 'Boolean',
+            check: 'boolean',
             valid: [
                 new Boolean(true),
                 common.booleanFalse,
@@ -208,9 +208,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"Date" should confirm value is a date', function () {
+    it('"date" should confirm value is a date', function () {
         test({
-            check: 'Date',
+            check: 'date',
             valid: [
                 new Date()
             ],
@@ -244,9 +244,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"RegExp" should confirm value is a RegExp', function () {
+    it('"regExp" should confirm value is a RegExp', function () {
         test({
-            check: 'RegExp',
+            check: 'regExp',
             valid: [
                 /./,
                 new RegExp('.')
@@ -277,9 +277,9 @@ describe('Default Validators', function () {
         });
     });
     
-    it('"Error" should confirm value is an Error', function () {
+    it('"error" should confirm value is an Error', function () {
         test({
-            check: 'Error',
+            check: 'error',
             valid: [
                 new Error()
             ],
@@ -309,9 +309,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"Function" should confirm value is a Function', function () {
+    it('"function" should confirm value is a Function', function () {
         test({
-            check: 'Function',
+            check: 'function',
             valid: [
                 function () {},
                 new Function()
@@ -342,9 +342,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"Arguments" should confirm value is an arguments object', function () {
+    it('"arguments" should confirm value is an arguments object', function () {
         test({
-            check: 'Arguments',
+            check: 'arguments',
             valid: [
                 arguments
             ],
@@ -376,9 +376,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"Object" should confirm value is a Object', function () {
+    it('"object" should confirm value is a Object', function () {
         test({
-            check: 'Object',
+            check: 'object',
             valid: [
                 common.objectIntegers,
                 common.objectStrings
@@ -409,9 +409,9 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"Array" should confirm value is a Array', function () {
+    it('"array" should confirm value is a Array', function () {
         test({
-            check: 'Array',
+            check: 'array',
             valid: [
                 common.arrayEmpty,
                 common.arrayIndexedIntegers,
@@ -446,12 +446,12 @@ describe('Default Validators', function () {
     });
 
     it('"annotate" should add an annotation to the current instance', function () {
-        prove().String().annotate({
+        prove().string().annotate({
             label: 'Test'
         }).test(1)
             .should.have.property('errors')
             .with.property('0').eql({
-                type: 'String',
+                type: 'string',
                 label: 'Test',
                 value: 1
             });
@@ -461,10 +461,10 @@ describe('Default Validators', function () {
         var doc = ['555555', 1];
 
         prove().eval(function (/**Val*/) {
-            return prove().Array(prove().String());
+            return prove().array(prove().string());
         }).test(doc).errors.should.eql({
             1: [{
-                type: 'String',
+                type: 'string',
                 value: 1
             }]
         });
@@ -477,18 +477,18 @@ describe('Default Validators', function () {
     it('"try" should try multiple validators', function () {
         // Both trys fail. (error).
         prove().try(
-            prove().Number()
+            prove().number()
         ).test('').should
             .have.property('errors')
             .with.property('0').eql({
-                type: 'Number',
+                type: 'number',
                 value: ''
             });
 
         // One try passes (success).
         prove().try(
-            prove().String(),
-            prove().Number()
+            prove().string(),
+            prove().number()
         ).test('').should.equal(true);
 
         // Ignore non-tests
@@ -496,11 +496,11 @@ describe('Default Validators', function () {
             null,
             {},
             function () {},
-            prove().String()
+            prove().string()
         ).test(1).should
             .have.property('errors')
             .with.property('0').eql({
-                type: 'String',
+                type: 'string',
                 value: 1
             });
     });
@@ -587,18 +587,18 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"greaterThan" should confirm value is an greater than a provided number', function () {
+    it('"moreThan" should confirm value is an greater than a provided number', function () {
         test({
-            check: 'greaterThan',
+            check: 'moreThan',
             args: [1],
             valid: [2, 3, 4],
             invalid: [-1, 0, 1]
         });
     });
 
-    it('"greaterThanOrEquals" should confirm value is an greater or equal to a provided number', function () {
+    it('"moreThanOrEquals" should confirm value is an greater or equal to a provided number', function () {
         test({
-            check: 'greaterThanOrEquals',
+            check: 'moreThanOrEquals',
             args: [1],
             valid: [1, 2, 3],
             invalid: [-2, -1, 0]
@@ -880,9 +880,9 @@ describe('Default Validators', function () {
         });
     });
     
-    it('"JSON" should confirm a value is parseable JSON', function () {
+    it('"json" should confirm a value is parseable JSON', function () {
         test({
-            check: 'JSON',
+            check: 'json',
             valid: [
                 '{ "key": "value" }'
             ],
@@ -1069,6 +1069,30 @@ describe('Default Validators', function () {
                 'abcdefg',
                 '',
                 '..'
+            ]
+        });
+    });
+    
+    it('"email" should confirm a value is an email', function () {
+        test({
+            check: 'email',
+            valid: [
+                'foo@bar.com',
+                'x@x.x',
+                'foo@bar.com.au',
+                'foo+bar@bar.com',
+                'hans.m端ller@test.com',
+                'hans@m端ller.com',
+                'test|123@m端ller.com',
+                'test+ext@gmail.com',
+                'some.name.midd.leNa.me.+extension@GoogleMail.com'
+            ],
+            invalid: [
+                'invalidemail@',
+                'invalid.com',
+                '@invalid.com',
+                'foo@bar.com.',
+                'foo@bar.co.uk.'
             ]
         });
     });

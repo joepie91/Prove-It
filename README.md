@@ -1,4 +1,4 @@
-![Prove It](https://raw.githubusercontent.com/DylanPiercey/Prove-It/master/prove-logo.jpg)
+![Prove It](https://raw.githubusercontent.com/DylanPiercey/Prove-It/master/prove-logo.png)
 
 Create composable, re-usable validators with in-depth error messages.
 
@@ -46,11 +46,11 @@ bower install prove-it
 ```JavaScript
 var prove = require('prove-it');
 
-var schema = prove().Object({
-    username: prove().String().alphaNumeric().length(5, 30),
-    password: prove().String().optional().match(/[a-zA-Z0-9]{2,30}/),
-    phoneNumbers: prove().Array( // Prove an entire array.
-        prove().String().phoneNumber()
+var schema = prove().object({
+    username: prove().string().alphaNumeric().length(5, 30),
+    password: prove().string().optional().match(/[a-zA-Z0-9]{2,30}/),
+    phoneNumbers: prove().array( // Prove an entire array.
+        prove().string().phoneNumber()
     )
 });
 

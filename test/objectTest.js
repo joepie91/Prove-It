@@ -21,19 +21,19 @@ describe('Object Validator', function () {
         };
 
         var test = {
-            name: prove().Object({
-                first: prove('First Name').String(),
-                last: prove('Last Name').String()
+            name: prove().object({
+                first: prove('First Name').string(),
+                last: prove('Last Name').string()
             })
         };
 
-        prove('Test Doc').Object(test).test(doc).errors.should.eql({
+        prove('Test Doc').object(test).test(doc).errors.should.eql({
             'name.first': [{
-                type: 'String',
+                type: 'string',
                 value: 1
             }],
             'name.last': [{
-                type: 'String',
+                type: 'string',
                 value: 2
             }]
         });
@@ -52,26 +52,26 @@ describe('Object Validator', function () {
         };
 
         var test = {
-            name: prove().Object({
-                first: prove().Object({
-                    value: prove().String(),
-                    caps: prove().String()
+            name: prove().object({
+                first: prove().object({
+                    value: prove().string(),
+                    caps: prove().string()
                 }),
-                last: prove().String()
+                last: prove().string()
             })
         };
 
-        prove().Object(test).test(doc).errors.should.eql({
+        prove().object(test).test(doc).errors.should.eql({
             'name.first.value': [{
-                type: 'String',
+                type: 'string',
                 value: 1
             }],
             'name.first.caps': [{
-                type: 'String',
+                type: 'string',
                 value: 2
             }],
             'name.last': [{
-                type: 'String',
+                type: 'string',
                 value: 3
             }],
             phone: [{
@@ -90,23 +90,23 @@ describe('Object Validator', function () {
         };
 
         var test = {
-            name: prove().Object(
+            name: prove().object(
                 {
-                    last: prove().String()
+                    last: prove().string()
                 },
                 {
-                    first: prove().String()
+                    first: prove().string()
                 }
             )
         };
 
-        prove().Object(test).test(doc).errors.should.eql({
+        prove().object(test).test(doc).errors.should.eql({
             'name.first': [{
-                type: 'String',
+                type: 'string',
                 value: 1
             }],
             'name.last': [{
-                type: 'String',
+                type: 'string',
                 value: 2
             }]
         });
@@ -114,14 +114,14 @@ describe('Object Validator', function () {
 
     it('should error with a non-validator function', function () {
         var instance = prove();
-        instance.Object.bind(instance, {
+        instance.object.bind(instance, {
             first: function () {},
-            last: prove().String()
+            last: prove().string()
         }).should.throw();
     });
     
     it('should error with arguments when negated', function () {
         var instance = prove();
-        instance.not.Object.bind(instance.not, { test: prove().String() }).should.throw();
+        instance.not.object.bind(instance.not, { test: prove().string() }).should.throw();
     });
 });

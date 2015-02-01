@@ -16,11 +16,11 @@ describe('Array Validator', function () {
     it('should validate a simple array', function () {
         var doc = ['555555', 1];
 
-        prove().Array(
-            prove().String()
+        prove().array(
+            prove().string()
         ).test(doc).errors.should.eql({
             1: [{
-                type: 'String',
+                type: 'string',
                 value: 1
             }]
         });
@@ -32,14 +32,14 @@ describe('Array Validator', function () {
         };
 
         var test = {
-            phones: prove().Array(
-                prove().String()
+            phones: prove().array(
+                prove().string()
             )
         };
 
-        prove().Object(test).test(doc).errors.should.eql({
+        prove().object(test).test(doc).errors.should.eql({
             'phones.1': [{
-                type: 'String',
+                type: 'string',
                 value: 1
             }]
         });
@@ -59,17 +59,17 @@ describe('Array Validator', function () {
         };
 
         var test = {
-            phones: prove().Array(
-                prove().Object({
-                    number: prove().String(),
-                    label: prove().String()
+            phones: prove().array(
+                prove().object({
+                    number: prove().string(),
+                    label: prove().string()
                 })
             )
         };
 
-        prove().Object(test).test(doc).errors.should.eql({
+        prove().object(test).test(doc).errors.should.eql({
             'phones.1.number': [{
-                type: 'String',
+                type: 'string',
                 value: 1
             }],
             'phones.1.label': [{
@@ -82,12 +82,12 @@ describe('Array Validator', function () {
     it('should compose validations within array', function () {
         var doc = ['555555', [1], ''];
 
-        prove().Array(
-            prove().String(),
+        prove().array(
+            prove().string(),
             prove().length(1, 6)
         ).test(doc).errors.should.eql({
                 1: [{
-                    type: 'String',
+                    type: 'string',
                     value: [1]
                 }],
                 2: [{
@@ -100,11 +100,11 @@ describe('Array Validator', function () {
 
     it('should error with a non-validator function', function () {
         var instance = prove();
-        instance.Array.bind(instance, function () {}).should.throw();
+        instance.array.bind(instance, function () {}).should.throw();
     });
     
     it('should error with arguments when negated', function () {
         var instance = prove();
-        instance.not.Array.bind(instance.not, prove().String()).should.throw();
+        instance.not.array.bind(instance.not, prove().string()).should.throw();
     });
 });
