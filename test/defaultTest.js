@@ -569,39 +569,39 @@ describe('Default Validators', function () {
         });
     });
 
-    it('"lessThan" should confirm value is an less than a provided number', function () {
+    it('"min" should confirm value is an less or equal to a provided number', function () {
         test({
-            check: 'lessThan',
-            args: [1],
-            valid: [0, -1, -2],
-            invalid: [1, 2, 3]
-        });
-    });
-
-    it('"lessThanOrEquals" should confirm value is an less or equal to a provided number', function () {
-        test({
-            check: 'lessThanOrEquals',
+            check: 'min',
             args: [1],
             valid: [1, 0, -1],
             invalid: [2, 3, 4]
         });
     });
 
-    it('"moreThan" should confirm value is an greater than a provided number', function () {
+    it('"max" should confirm value is an greater or equal to a provided number', function () {
         test({
-            check: 'moreThan',
-            args: [1],
-            valid: [2, 3, 4],
-            invalid: [-1, 0, 1]
-        });
-    });
-
-    it('"moreThanOrEquals" should confirm value is an greater or equal to a provided number', function () {
-        test({
-            check: 'moreThanOrEquals',
+            check: 'max',
             args: [1],
             valid: [1, 2, 3],
             invalid: [-2, -1, 0]
+        });
+    });
+
+    it('"less" should confirm value is an less than a provided number', function () {
+        test({
+            check: 'less',
+            args: [1],
+            valid: [0, -1, -2],
+            invalid: [1, 2, 3]
+        });
+    });
+
+    it('"more" should confirm value is an greater than a provided number', function () {
+        test({
+            check: 'more',
+            args: [1],
+            valid: [2, 3, 4],
+            invalid: [-1, 0, 1]
         });
     });
 

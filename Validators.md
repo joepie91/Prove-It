@@ -278,32 +278,32 @@
     prove().equals(1).test(1); // True
     ```
 
-+ **lessThan(max)** : Input should be less than the `max`.
++ **min(max)** : Input should be less than or equal to the `max`.
 
     *Supported types:* `String`, `Number`, `Date`
     ```JavaScript
-    prove().lessThan(2).test(1); // True
+    prove().min(1).test(1); // True
     ```
 
-+ **lessThanOrEquals(max)** : Input should be less than or equal to the `max`.
++ **max(min)** : Input should be greater than or equal to the `min`.
 
     *Supported types:* `String`, `Number`, `Date`
     ```JavaScript
-    prove().lessThanOrEquals(1).test(1); // True
+    prove().max(1).test(1); // True
     ```
 
-+ **moreThan(min)** : Input should be greater than the `min`.
++ **less(max)** : Input should be less than the `max`.
 
     *Supported types:* `String`, `Number`, `Date`
     ```JavaScript
-    prove().greaterThan(1).test(2); // True
+    prove().less(2).test(1); // True
     ```
 
-+ **moreThanOrEquals(min)** : Input should be greater than or equal to the `min`.
++ **more(min)** : Input should be greater than the `min`.
 
     *Supported types:* `String`, `Number`, `Date`
     ```JavaScript
-    prove().greaterThanOrEquals(1).test(1); // True
+    prove().more(1).test(2); // True
     ```
 
 + **precision(max)** : Input should be a Number type and have a precision less than or equal to `max`.
