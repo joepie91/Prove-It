@@ -18,7 +18,7 @@ It allows for quick simple validations as well as complex infinitely nested vali
 * Chainable validators that read clearly.
 * Composable validators that make sense.
 * Schema validation for complex objects, arrays and collections.
-* Designed to create validators on startup, instead of at validation time, for optimum performance.
+* Designed for optimum performance. [Benchmark here](http://jsperf.com/prove-it-vs-joi).
 * An error message structure that is terse and friendly for developers.
 
 #Installation
