@@ -8,15 +8,45 @@ module.exports = function (grunt) {
         {
             browserName: 'android',
             platform: 'Linux',
+            version: '4.4',
+            deviceName: 'Samsung Galaxy S4 Emulator',
+            'device-orientation': 'portrait'
+        },
+        {
+            browserName: 'android',
+            platform: 'Linux',
             version: '4.0',
             deviceName: 'Samsung Galaxy S2 Emulator',
             'device-orientation': 'portrait'
         },
         {
             browserName: 'iPhone',
-            platform: 'OS X 10.9',
-            version: '7.0',
+            platform: 'OS X 10.10',
+            version: '8.0',
             'device-orientation': 'portrait'
+        },
+        {
+            browserName: 'iPhone',
+            platform: 'OS X 10.9',
+            version: '6.0',
+            'device-orientation': 'portrait'
+        },
+        {
+            browserName: 'iPad',
+            platform: 'OS X 10.10',
+            version: '8.0',
+            'device-orientation': 'portrait'
+        },
+        {
+            browserName: 'iPad',
+            platform: 'OS X 10.9',
+            version: '6.0',
+            'device-orientation': 'portrait'
+        },
+        {
+            browserName: 'safari',
+            version: '8',
+            platform: 'OS X 10.10'
         },
         {
             browserName: 'safari',
@@ -24,17 +54,27 @@ module.exports = function (grunt) {
             platform: 'OS X 10.6'
         },
         {
+            browserName: 'chrome',
+            platform: 'WIN8.1'
+        },
+        {
+            browserName: 'chrome',
+            version: '26',
+            platform: 'XP'
+        },
+        {
             browserName: 'firefox',
-            version: '19',
+            platform: 'WIN8.1'
+        },
+        {
+            browserName: 'firefox',
+            version: '4',
             platform: 'XP'
         },
         {
-            browserName: 'chrome',
+            browserName: 'opera',
+            version: '11.64',
             platform: 'XP'
-        },
-        {
-            browserName: 'chrome',
-            platform: 'linux'
         },
         {
             browserName: 'internet explorer',
