@@ -41,6 +41,7 @@ bower install prove-it
     window.prove; // Global prove if no module system in place.
 </script>
 ```
+
 #Example
 
 ```JavaScript
@@ -84,18 +85,19 @@ The above schema defines the following constraints:
 * **prove()** : Returns a chainable validator.
 * **prove.concat(...Tests)** : Merges all provided validator chains, and returns a new one.
 * **prove.extend(validators)** : Adds all of the given validators to the prove validator chain (example below).
-```JavaScript
-prove.extend({
-    myValidator: function (/** Validator chaining options */) {
-        // Pre validate setup
-        return function (val) {
-            // return true for success, false for fail.
-        };
-    }
-});
 
-prove().myValidator(/** options */).test(null)
-```
+    ```JavaScript
+    prove.extend({
+        myValidator: function (/** Validator chaining options */) {
+            // Pre validate setup
+            return function (val) {
+                // return true for success, false for fail.
+            };
+        }
+    });
+    
+    prove().myValidator(/** options */).test(null);
+    ```
 
 #Error Structure
 

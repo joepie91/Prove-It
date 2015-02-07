@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = function (grunt) {
-    grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-mocha-istanbul');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-saucelabs');
     
@@ -51,41 +49,6 @@ module.exports = function (grunt) {
     ];
 
     grunt.initConfig({
-        /* jshint ignore:start */
-        mocha_istanbul: {
-            dist: {
-                src: 'test/**/*Test.js',
-                options: {
-                    coverage: true,
-                    coverageFolder: './bin/coverage',
-                    check: {
-                        lines: 75,
-                        statements: 75
-                    },
-                    root: './lib'
-                }
-            }
-        },
-        /* jshint ignore:end */
-        browserify: {
-            dist: {
-                files: {
-                    'bin/prove-it.min.js': ['lib/index.js']
-                },
-                options: {
-                    browserifyOptions: {
-                        standalone: 'prove'
-                    },
-                    transform: ['uglifyify']
-                }
-            },
-            test: {
-                files: {
-                    'test/run.js': ['test/*Test.js']
-                }
-            }
-        },
-        
         connect: {
             server: {
                 options: {
@@ -110,8 +73,5 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', ['mocha_istanbul', 'browserify']);
-    grunt.registerTask('test', ['mocha_istanbul']);
-    grunt.registerTask('build', ['browserify', 'mocha_istanbul']);
     grunt.registerTask('sauce', ['connect', 'saucelabs-mocha']);
 };

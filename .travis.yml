@@ -6,6 +6,7 @@ before_script:
   - npm install -g codeclimate-test-reporter
 after_success:
   - codeclimate < ./bin/coverage/lcov.info
+  - make build-browser
   - grunt sauce
 addons:
   code_climate:

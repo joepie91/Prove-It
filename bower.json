@@ -5,7 +5,7 @@
   "authors": [
     "pierceydylan@gmail.com <Dylan Piercey>"
   ],
-  "main": "bin/prove-it.min.js",
+  "main": "bin/prove-it.js",
   "keywords": [
     "prove",
     "prove-it",
