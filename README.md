@@ -34,9 +34,9 @@ bower install prove-it
 
 ```
 
-####[Download](https://raw.githubusercontent.com/DylanPiercey/Prove-It/master/bin/prove-it.min.js)
+####[Download](https://raw.githubusercontent.com/DylanPiercey/Prove-It/master/bin/prove-it.js)
 ```HTML
-<script type="text/javascript" src="prove-it.min.js"></script>
+<script type="text/javascript" src="prove-it.js"></script>
 <script>
     window.prove; // Global prove if no module system in place.
 </script>
