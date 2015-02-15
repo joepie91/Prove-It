@@ -9,9 +9,9 @@ Create composable, re-usable validators with in-depth error messages.
 [![npm](https://img.shields.io/npm/dm/prove-it.svg)](https://www.npmjs.com/package/prove-it)
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/dylanpiercey.svg)](https://saucelabs.com/u/dylanpiercey)
 
-###[See the list of default validators](https://github.com/DylanPiercey/Prove-It/blob/master/Validators.md)
+### [See the list of default validators](https://github.com/DylanPiercey/Prove-It/blob/master/Validators.md)
 
-#Why
+# Why
 Prove-It was created to validate forms, database models and requests.
 It allows for quick simple validations as well as complex infinitely nested validation for collections.
 
@@ -21,20 +21,20 @@ It allows for quick simple validations as well as complex infinitely nested vali
 * Designed for optimum performance. [Benchmark here](http://jsperf.com/prove-it-vs-joi).
 * An error message structure that is terse and friendly for developers.
 
-#Installation
+# Installation
 
-####Npm
+#### Npm
 ```Console
 npm install prove-it
 ```
 
-####Bower
+#### Bower
 ```Console
 bower install prove-it
 
 ```
 
-####[Download](https://raw.githubusercontent.com/DylanPiercey/Prove-It/master/bin/prove-it.js)
+#### [Download](https://raw.githubusercontent.com/DylanPiercey/Prove-It/master/bin/prove-it.js)
 ```HTML
 <script type="text/javascript" src="prove-it.js"></script>
 <script>
@@ -42,7 +42,7 @@ bower install prove-it
 </script>
 ```
 
-#Example
+# Example
 
 ```JavaScript
 var prove = require('prove-it');
@@ -80,8 +80,8 @@ The above schema defines the following constraints:
     * Must be an array.
     * Each element must be a string and a phone number.
 
-#API
-###For a list of validators click [here!](https://github.com/DylanPiercey/Prove-It/blob/master/Validators.md)
+# API
+### For a list of validators click [here!](https://github.com/DylanPiercey/Prove-It/blob/master/Validators.md)
 * **prove()** : Returns a chainable validator.
 * **prove.concat(...Tests)** : Merges all provided validator chains, and returns a new one.
 * **prove.extend(validators)** : Adds all of the given validators to the prove validator chain (example below).
@@ -99,7 +99,7 @@ The above schema defines the following constraints:
     prove().myValidator(/** options */).test(null);
     ```
 
-#Error Structure
+# Error Structure
 
 ```JavaScript
 {
@@ -128,7 +128,7 @@ The above schema defines the following constraints:
 
 ---
 
-###Contributions
+### Contributions
 
 * Use .jshintrc file as the coding standards.
 * Use grunt to run tests.
